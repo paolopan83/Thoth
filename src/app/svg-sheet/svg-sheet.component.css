@@ -1,3 +1,16 @@
-svg {
+/*.svg-container {*/
+  /*position: relative;*/
+/*}*/
 
+svg {
+  background: #aaFFaa;
+  height: 100%;
+  width: 100%;
+  display: block;
 }
+
+/*.svg {*/
+  /*margin: 10px;*/
+  /*max-width:100%;*/
+  /*//max-height:100%;*/
+/*}*/

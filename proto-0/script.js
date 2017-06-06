@@ -26,6 +26,8 @@ var STROKE = 0.1;
 var NIB = 3.8;
 
 let ruler = [3, 5, 3]; // first line at 0, secon at 2.5, third at (2.5 + 4.5) and so on
+//[2,4,2] gothic
+
 let lineWidth = [0.3, 0.3, 3];
 let styleMixin = [undefined, undefined, undefined];
 
