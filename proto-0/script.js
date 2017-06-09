@@ -18,14 +18,14 @@ H = H - 1
 $("body").append('<svg id="svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + 'mm" height="' + H + 'mm"></svg>')
 
 
-var s = Snap("#svg");
+var s = SVG("svg");
 
 
 var MARGIN = 5;
 var STROKE = 0.1;
 var NIB = 3.8;
 
-let ruler = [3, 5, 3]; // first line at 0, secon at 2.5, third at (2.5 + 4.5) and so on
+let ruler = [3, 5, 3]; // first line at 0, second at 2.5, third at (2.5 + 4.5) and so on
 //[2,4,2] gothic
 
 let lineWidth = [0.3, 0.3, 3];
@@ -64,9 +64,9 @@ function addHorizontaLine(y, width, styleMixin) {
 
   var line = s.line(MARGIN, y, W - MARGIN, y);
 
-  line.attr({
-    stroke: "#000",
-    strokeWidth: STROKE * width
+  line.stroke({
+    color: "#000",
+    width: STROKE * width
   });
 
   styleMixin && line.attr(styleMixin);
@@ -77,9 +77,9 @@ function addHorizontaLine(y, width, styleMixin) {
 function addLine(x, y, x1, y1, width) {
   (!width) && (width = 1);
   var line = s.line(x, y, x1, y1);
-  line.attr({
-    stroke: "#000",
-    strokeWidth: STROKE * width
+  line.stroke({
+    color: "#000",
+    width: STROKE * width
   });
   return line;
 }
@@ -90,23 +90,26 @@ function slantVector(degrees) {
 
 let slantLines = [];
 let i = 10;
+
+
+let maskRect = s.rect(W - MARGIN * 2, H - availableVerticalMargin).move(MARGIN, topMargin);
+
+maskRect.attr({
+  stroke: '#fff',
+  'strokeWidth': 0,
+  fill: '#fff'
+});
+
+let mask = s.mask().add(maskRect);
+
 for (let i = 1.2; i * NIB < W + H; i += 3 * NIB) {
   let line = addLine(xCoord(i), yCoord(0), xCoord(i + 100 * slantVector(7)[0]), yCoord(100 * slantVector(7)[1]));
 
-  let mask = s.rect(MARGIN, topMargin, W - MARGIN * 2, H - availableVerticalMargin);
-  mask.attr({
-    stroke: 'silver',
-    'strokeWidth': 0,
-    fill: 'silver'
-  });
 
 
-  line.attr({
-    mask: mask
-  });
-  // s.group(line).attr({
-  //   mask: mask
-  // });
+
+
+  line.maskWith(mask);
 }
 
 
