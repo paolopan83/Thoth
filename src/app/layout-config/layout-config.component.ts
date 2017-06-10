@@ -12,11 +12,9 @@ export class LayoutConfigComponent implements OnInit {
 
   constructor(public optionData: OptionsDataService) {
 
-
   }
 
   ngOnInit() {
-    debugger;
     this.options = this.optionData.options$.getValue();
   }
 

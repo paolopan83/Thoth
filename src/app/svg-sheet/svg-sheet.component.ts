@@ -32,18 +32,20 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
   }
 
   private drawSheet(options: Options) {
-    debugger;
-    let svgPaper = this.svgElement.first;
-    if (options.isValid()) {
-      debugger;
-      drawStuff(svgPaper, options);
+    if(this.svgElement){
+      let svgPaper = this.svgElement.first;
+      if (options.isValid()) {
+        drawStuff(svgPaper, options);
+      }
     }
   }
 
   ngAfterViewInit(): void {
-    debugger;
-    this.drawSheet(this.optionData.options$.getValue());
-    this.optionData.options$.subscribe(this.drawSheet);
+    //this.drawSheet(this.optionData.options$.getValue());
+    var self = this;
+    this.optionData.options$.subscribe((options: Options) =>{
+      self.drawSheet(options);
+    });
   }
 
 }
@@ -51,11 +53,13 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
 
 function drawStuff(element, options: Options){
 
+  var NIB = options.nibSize;
+  var SLANT = options.slant;
 
   var W = 297;
   var H = 210;
 
-//To avoid blank page in chrome
+  //To avoid blank page in chrome
   H = H - 1;
 
 
@@ -64,13 +68,13 @@ function drawStuff(element, options: Options){
   element.nativeElement.setAttribute("viewBox", '0 0 ' + W + ' ' + H);
 
   var s = SVG(element.nativeElement);
-  s.clear();
+  //s.clear();
   s.rect(W,H).fill('#fff');
 
 
   var MARGIN = 5;
   var STROKE = 0.1;
-  var NIB = options.nibSize;
+
 
   let ruler = [3, 5, 3]; // first line at 0, second at 2.5, third at (2.5 + 4.5) and so on
 //[2,4,2] gothic
@@ -137,25 +141,35 @@ function drawStuff(element, options: Options){
   let i = 10;
 
 
-  let maskRect = s.rect(W - MARGIN * 2, H - availableVerticalMargin).move(MARGIN, topMargin);
-
-  maskRect.attr({
-    stroke: '#fff',
-    'strokeWidth': 0,
-    fill: '#fff'
-  });
-
-  let mask = s.mask().add(maskRect);
-
-  for (let i = 1.2; i * NIB < W + H; i += 3 * NIB) {
-    let line = addLine(xCoord(i), yCoord(0), xCoord(i + 100 * slantVector(7)[0]), yCoord(100 * slantVector(7)[1]));
 
 
+  debugger;
+  if(SLANT !== undefined && SLANT !== null && SLANT !== ""){
+    let maskRect = s.rect(W - MARGIN * 2, H - availableVerticalMargin).move(MARGIN, topMargin);
+
+    maskRect.attr({
+      stroke: '#fff',
+      'strokeWidth': 0,
+      fill: '#fff'
+    });
+    //maskRect.fill('#f00');
 
 
+    let mask = s.mask().add(maskRect);
 
-    line.maskWith(mask);
+    for (let i = 1.2; i * NIB < W + H; i += 3 * NIB) {
+      let line = addLine(xCoord(i), yCoord(0), xCoord(i + 100 * slantVector(SLANT)[0]), yCoord(100 * slantVector(SLANT)[1]));
+      line.maskWith(mask);
+    }
+
+    //Not working. Pending issue https://github.com/svgdotjs/svg.js/issues/689
+    // for (let i =7.1; i * NIB < W + H; i += 3 * NIB) {
+    //   let line = addLine(xCoord(i), 0, xCoord(i), H);
+    //   //line.skew(-SLANT,0);
+    //   line.maskWith(mask);
+    // }
   }
+
 
 
   for (let i = 0; i < max; i++) {
