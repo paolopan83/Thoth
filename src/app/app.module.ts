@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { SvgSheetComponent } from './svg-sheet/svg-sheet.component';
 import { LayoutConfigComponent } from './layout-config/layout-config.component';
+import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
+import {OptionsDataService} from "./option-data.service";
 
 @NgModule({
   declarations: [
@@ -14,11 +16,12 @@ import { LayoutConfigComponent } from './layout-config/layout-config.component';
     LayoutConfigComponent
   ],
   imports: [
+    AlertModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [OptionsDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

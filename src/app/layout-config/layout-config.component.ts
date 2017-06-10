@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {OptionsDataService, Options} from "../option-data.service";
 
 @Component({
   selector: 'app-layout-config',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutConfigComponent implements OnInit {
 
-  constructor() { }
+  private options;
+
+  constructor(public optionData: OptionsDataService) {
+
+
+  }
 
   ngOnInit() {
+    debugger;
+    this.options = this.optionData.options$.getValue();
+  }
+
+  optionsChange(){
+    this.optionData.updateOptions(this.options);
   }
 
 }
