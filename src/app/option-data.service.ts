@@ -19,6 +19,8 @@ export class Options{
   //in degrees
   public slant:number|string = 7;
 
+  public rowHieghts: Array<number>;
+
   public isValid(){
     return this.nibSize > 0;
   }

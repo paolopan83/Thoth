@@ -8,7 +8,9 @@ import {OptionsDataService, Options} from "../option-data.service";
 })
 export class LayoutConfigComponent implements OnInit {
 
-  private options;
+  private options: Options;
+
+  public rowsDefinition;
 
   constructor(public optionData: OptionsDataService) {
 
@@ -19,6 +21,8 @@ export class LayoutConfigComponent implements OnInit {
   }
 
   optionsChange(){
+    debugger;
+    this.options.rowHieghts = eval(this.rowsDefinition);
     this.optionData.updateOptions(this.options);
   }
 

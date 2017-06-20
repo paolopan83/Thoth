@@ -76,10 +76,16 @@ function drawStuff(element, options: Options){
   var STROKE = 0.1;
 
 
-  let ruler = [3, 5, 3]; // first line at 0, second at 2.5, third at (2.5 + 4.5) and so on
+  //let ruler = [3, 5, 3]; // first line at 0, second at 2.5, third at (2.5 + 4.5) and so on
 //[2,4,2] gothic
 
-  let lineWidth = [0.3, 0.3, 3];
+  let ruler = options.rowHieghts;
+  if(!ruler){
+    ruler=[1];
+  }
+
+  //let lineWidth = [0.3, 0.3, 3];
+  let lineWidth = Array(ruler.length).fill(1);
   let styleMixin = [undefined, undefined, undefined];
 
 
@@ -142,8 +148,6 @@ function drawStuff(element, options: Options){
 
 
 
-
-  debugger;
   if(SLANT !== undefined && SLANT !== null && SLANT !== ""){
     let maskRect = s.rect(W - MARGIN * 2, H - availableVerticalMargin).move(MARGIN, topMargin);
 
@@ -158,7 +162,7 @@ function drawStuff(element, options: Options){
     let mask = s.mask().add(maskRect);
 
     for (let i = 1.2; i * NIB < W + H; i += 3 * NIB) {
-      let line = addLine(xCoord(i), yCoord(0), xCoord(i + 100 * slantVector(SLANT)[0]), yCoord(100 * slantVector(SLANT)[1]));
+      let line = addLine(xCoord(i), yCoord(0), xCoord(i + 500 * slantVector(SLANT)[0]), yCoord(500 * slantVector(SLANT)[1]));
       line.maskWith(mask);
     }
 
