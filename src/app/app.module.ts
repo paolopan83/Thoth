@@ -8,6 +8,7 @@ import { SvgSheetComponent } from './svg-sheet/svg-sheet.component';
 import { LayoutConfigComponent } from './layout-config/layout-config.component';
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import {OptionsDataService} from "./option-data.service";
+import {SvgDrawerService} from "./svg-drawer.service";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {OptionsDataService} from "./option-data.service";
     FormsModule,
     HttpModule
   ],
-  providers: [OptionsDataService],
+  providers: [OptionsDataService, SvgDrawerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

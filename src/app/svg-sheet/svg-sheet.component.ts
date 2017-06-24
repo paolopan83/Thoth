@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit, Query, ViewChildren} from '@angular/core';
 import {Options, OptionsDataService} from "../option-data.service";
+import {SvgDrawerService} from "../svg-drawer.service";
 
 declare var SVG:any;
 declare var _:any;
@@ -24,9 +25,10 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
 
   @ViewChildren('svg') svgElement: any;
 
-  $drawStuff = _.debounce(drawStuff, 300);
+  drawStuffDebounced ;
 
-  constructor(private optionData: OptionsDataService) {
+  constructor(private optionData: OptionsDataService, private svgDrawer: SvgDrawerService) {
+    this.drawStuffDebounced =  _.debounce(svgDrawer.drawStuff, 300);
   }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
     if(this.svgElement){
       let svgPaper = this.svgElement.first;
       if (options.isValid()) {
-        this.$drawStuff(svgPaper, options);
+        this.drawStuffDebounced(svgPaper, options);
       }
     }
   }
@@ -53,7 +55,7 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
 }
 
 //TODO create service
-function drawStuff(element, options: Options){
+function delme_drawStuff(element, options: Options){
 
   console.log('drawStuff');
 
