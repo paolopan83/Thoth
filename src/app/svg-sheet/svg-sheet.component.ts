@@ -24,6 +24,8 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
 
   @ViewChildren('svg') svgElement: any;
 
+  $drawStuff = _.debounce(drawStuff, 300);
+
   constructor(private optionData: OptionsDataService) {
   }
 
@@ -35,7 +37,7 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
     if(this.svgElement){
       let svgPaper = this.svgElement.first;
       if (options.isValid()) {
-        drawStuff(svgPaper, options);
+        this.$drawStuff(svgPaper, options);
       }
     }
   }
@@ -50,8 +52,10 @@ export class SvgSheetComponent implements OnInit, AfterViewInit{
 
 }
 
-
+//TODO create service
 function drawStuff(element, options: Options){
+
+  console.log('drawStuff');
 
   var NIB = options.nibSize;
   var SLANT = options.slant;

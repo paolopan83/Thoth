@@ -21,6 +21,8 @@ export class Options{
 
   public rowHieghts: Array<number>;
 
+  public text: string;
+
   public isValid(){
     return this.nibSize > 0;
   }

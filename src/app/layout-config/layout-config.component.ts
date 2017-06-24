@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OptionsDataService, Options} from "../option-data.service";
 
+
 @Component({
   selector: 'app-layout-config',
   templateUrl: './layout-config.component.html',
@@ -21,7 +22,6 @@ export class LayoutConfigComponent implements OnInit {
   }
 
   optionsChange(){
-    debugger;
     this.options.rowHieghts = eval(this.rowsDefinition);
     this.optionData.updateOptions(this.options);
   }
