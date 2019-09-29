@@ -14,16 +14,20 @@ export class OptionsDataService {
 }
 
 export class Options{
-  //In millimeters
-  public nibSize = 2;
-  //in degrees
-  public slant:number|string = 7;
+  // In millimeters
+  public nibSize = 3.5;
+  // in degrees
+  public slant: number|string = 7;
 
-  public rowHieghts: Array<number>;
+  public text = 'Made with Thoth';
 
-  public text: string = "tods Mpqt";
+  public rowHieghts = '2, 3';
 
-  public isValid(){
+  public static parseRowHeights(text: string): Array<number> {
+    return text.split(/[, ]+/).map((x) => parseFloat(x));
+  }
+
+  public isValid() {
     return this.nibSize > 0;
   }
 }

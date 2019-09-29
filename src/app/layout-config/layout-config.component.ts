@@ -11,8 +11,6 @@ export class LayoutConfigComponent implements OnInit {
 
   public options: Options;
 
-  public rowsDefinition;
-
   constructor(public optionData: OptionsDataService) {
 
   }
@@ -22,8 +20,10 @@ export class LayoutConfigComponent implements OnInit {
   }
 
   optionsChange(){
-    this.options.rowHieghts = eval(this.rowsDefinition);
     this.optionData.updateOptions(this.options);
   }
 
+  onPrint() {
+    window.print();
+  }
 }

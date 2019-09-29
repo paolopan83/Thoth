@@ -1,4 +1,10 @@
-# Plot
+# Thoth
+
+Thoth is an Egyptian god. He served as scribe of the gods credited with the invention of writing and Egyptian hieroglyphs. 
+
+This application allows to create guide sheets for calligraphy.
+
+The web application can be accessed on http://thoth.github.com
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 

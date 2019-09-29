@@ -85,7 +85,7 @@ function delme_drawStuff(element, options: Options){
   //let ruler = [3, 5, 3]; // first line at 0, second at 2.5, third at (2.5 + 4.5) and so on
 //[2,4,2] gothic
 
-  let ruler = options.rowHieghts;
+  let ruler = Options.parseRowHeights(options.rowHieghts);
   if(!ruler){
     ruler=[1];
   }

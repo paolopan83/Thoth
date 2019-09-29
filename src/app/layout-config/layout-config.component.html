@@ -7,14 +7,13 @@
   </div>
 
   <div class="row">
-    <label class="col-sm-12">Slant (°)</label>
-    <input class="col-sm-8" type="text" [(ngModel)]="options.slant" (ngModelChange)="optionsChange()">
-    <button class="col-sm-4">Clear</button>
+    <label class="col-sm-12">Slant (°). 0 for no slant lines</label>
+    <input class="col-sm-12" type="text" [(ngModel)]="options.slant" (ngModelChange)="optionsChange()">
   </div>
 
   <div class="row">
     <label class="col-sm-12">Row heights</label>
-    <input class="col-sm-12" type="text" [(ngModel)]="rowsDefinition" (ngModelChange)="optionsChange()">
+    <input class="col-sm-12" type="text" [(ngModel)]="options.rowHieghts" (ngModelChange)="optionsChange()">
   </div>
 
   <div class="row">
@@ -22,6 +21,9 @@
     <input class="col-sm-12" type="text" [(ngModel)]="options.text" (ngModelChange)="optionsChange()">
   </div>
 
+  <div class="row">
+    <button class="col-sm-12" (click)="onPrint()">Print</button>
+  </div>
 
 
 </div>
