@@ -9,7 +9,7 @@ import {OptionsDataService, Options} from "../option-data.service";
 })
 export class LayoutConfigComponent implements OnInit {
 
-  private options: Options;
+  public options: Options;
 
   public rowsDefinition;
 
